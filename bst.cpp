@@ -230,12 +230,22 @@ Key BST<Data, Key>::successor(Key k){
         }
     }
 }
+
 /*
 Pre-Conditions: 
 Post-Conditions: 
 */
 template <class Data, class Key>
 std::string BST<Data, Key>::in_order(){
+    std::stringstream ss;
+    in_order_helper(root, ss);
+    std::string result = ss.str();
+
+    if (!result.empty()) {
+        result.pop_back();
+    }
+    
+    return result;
     
 }
 
@@ -310,7 +320,28 @@ std::string BST<Data, Key>::to_string(){
 }
 
 
-//healper funciton
+template<class Data, class Key>
+void BST<Data, Key>::in_order_helper(Node* x, std::stringstream& ss) const{
+    if (x == nullptr) {
+        return
+    }
+    
+    // L -> C -> R
+
+    in_order_helper(x-> left, ss);
+    ss << x -> key << " ";
+    in_order_helper(x -> right, ss);
+}
+
+
+
+
+
+
+
+
+
+//helper funciton
 /*
 Pre-Conditions: Current is either a node or NULL
 Post_Conditions: Current and it's children are deleted
