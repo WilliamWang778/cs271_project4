@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <vector>
 #include "bst.h"
 
 using namespace std;
@@ -63,7 +64,8 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Data BST<Data, Key>::max_data(){
-    
+    Node* max = getMaxNode();
+    return(max->data);
 }
 
 /*
@@ -72,7 +74,8 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Key BST<Data, Key>::max_key(){
-    
+    Node* max = getMaxNode();
+    return(max->key);
 }
 
 /*
@@ -81,7 +84,8 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Data BST<Data, Key>::min_data(){
-    
+    Node* min = getMinNode();
+    return(min->data);
 }
 
 /*
@@ -90,7 +94,8 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Key BST<Data, Key>::min_key(){
-    
+    Node* min = getMinNode();
+    return(min->key);
 }
 
 
@@ -123,12 +128,58 @@ void BST<Data, Key>::trim(Key low, Key high){
 
 //Utility Operations
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: None
+Post-Conditions: A string with all key from top(root) to bottom(final leaves) from left to right
 */
 template <class Data, class Key>
 std::string BST<Data, Key>::to_string(){
+    if(node == NULL){
+        return "";
+    }
+
+    std::stringstream ss;
     
+    vector<Node*> childNodes = {root};
+    vector<Node*> nextChildNodes;
+    bool first = true;
+
+    //ends when there are no new generations
+    while(!childNodes.empty()){
+
+        //clears newChildren
+        while(!nextChildNodes.empty()){
+            nextChildNodes.pop_back();
+        }
+
+        //add all siblings/cousins to the string
+        for(int i=0; i<len(childNodes); i++){
+            if(first){
+                first = false;
+            }else{
+                ss << " ";
+            }
+
+            ss << childNodes[i]->key;
+
+            //potental kids stored
+            if(childNodes[i]->left != NULL){
+                nextChildNodes.push_back(childNodes[i]->left);
+            }
+            if(childNodes[i]->right != NULL){
+                nextChildNodes.push_back(childNodes[i]->right);
+            }
+        }
+
+        //empty kids
+        while(!childNodes.empty()){
+            childNodes.pop_back();
+        }
+        //remake kids
+        for(int i=0; i<len(nextChildNodes); i++){
+            childNodes.push_back(nextChildNodes[i]);
+        }
+    }
+    return ss.str();
 }
 
 
