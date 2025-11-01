@@ -48,11 +48,6 @@ void BST<Data, Key>::insert(Data d, Key k){
         } else {
             x = x -> right;
         } 
-        //else{
-        //     x -> data = d;
-        //     delete z;
-        //     return;
-        // }
     }
     z -> p = y;
     if (y == NULL){
