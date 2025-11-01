@@ -37,8 +37,57 @@ Post-Conditions:
 */
 template <class Data, class Key>
 void BST<Data, Key>::insert(Data d, Key k){
-    
+
+    Node* z = new Node(d,k);
+    Node* y = NULL;
+    Node* x = root;
+    while (x != NULL){
+        y = x;
+        if (k < x->key){
+            x = x -> left;
+        } else {
+            x = x -> right;
+        } 
+        //else{
+        //     x -> data = d;
+        //     delete z;
+        //     return;
+        // }
+    }
+    z -> p = y;
+    if (y == NULL){
+        root = z;
+    } else if (z -> key < y -> key){
+        y -> left = z;
+    } else{
+        y-> right = z;
+    }
+
 }
+
+
+/*
+Pre-Conditions: 
+Post-Conditions: 
+*/
+template <class Data, class Key>
+typename BST<Data, Key>::Node*
+BST<Data, Key>::searchNode(const Key& k) const {
+    Node* x = root;
+    while (x != nullptr) {
+        if (k < x->key) {
+            x = x->left;
+        } else if (x->key < k) {
+            x = x->right;
+        } else {
+            return x;  
+        }
+    }
+    return nullptr;
+}
+
+
+
 
 /*
 Pre-Conditions: 
@@ -46,8 +95,18 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Data BST<Data, Key>::get(Key k){
+
+    Node* x = searchNode(k);
+    if (x != NULL){
+        return x -> data;
+    } else {
+        return Data{};
+    }
+    
     
 }
+
+
 
 /*
 Pre-Conditions: 
@@ -55,6 +114,34 @@ Post-Conditions:
 */
 template <class Data, class Key>
 void BST<Data, Key>::remove(Key k){
+    Node* z = searchNode(k);
+    if (!z) {
+        return; 
+    } 
+
+    if (z->left == nullptr) {
+        transplant(z, z->right);
+        delete z;
+    } else if (z->right == nullptr) {
+        transplant(z, z->left);
+        delete z;
+    } else {
+        Node* y = minimum(z->right); 
+        if (y->p != z) {
+            transplant(y, y->right);
+            y->right = z->right;
+            if (y->right != NULL){
+                y -> right -> p = y;
+            }
+            
+        }
+        transplant(z, y);
+        y->left = z->left;
+        if (y->left != NULL){
+            y->left->p = y;
+        }
+        delete z;
+    }
     
 }
 

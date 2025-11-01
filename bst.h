@@ -21,24 +21,47 @@ private:
     void FullClear(Node* current);
     const Node* getMinNode(){
         if(empty()){
-            return NULL
+            return NULL;
         }
         Node* current = root;
         while(current->left != NULL){
             current = current->left;
         }
         return current;
-    };
+    }
     const Node* getMaxNode(){
         if(empty()){
-            return NULL
+            return NULL;
         }
         Node* current = root;
         while(current->right != NULL){
             current = current->right;
         }
         return current;
-    };
+    }
+    Node* searchNode(const Key& k) const;
+
+    Node* minimum(Node* x) const{
+        while (x != NULL && x -> left != NULL){
+            x = x -> left;
+        }
+        return x;
+    }
+
+    void transplant(Node* u, Node* v){
+        if (u->p == nullptr) {
+            root = v;
+        } else if (u == u->p->left) {
+            u->p->left = v;
+        } else {
+            u->p->right = v;
+        }
+        if (v != nullptr) {
+            v->p = u->p;
+        }
+    }
+    
+    
 
 public:
 
