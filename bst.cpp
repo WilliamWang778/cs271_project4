@@ -203,24 +203,23 @@ Key BST<Data, Key>::successor(Key k){
     // finding x
     Node* x = searchNode(k);
 
-    // if x == nullptr, 
+    // if x == nullptr
     if (x == nullptr){
         return Key{}; 
     }
 
     if (x -> right != nullptr) {
-        return minimum(x.right) -> key; //key value
+        return minimum(x->right) -> key; //key value
     }
     
     else {
-        Node* y = x -> p
-        while (y != nullptr && x = y -> right) {
-            x = y
-            y = y -> p
+        Node* y = x -> p;
+        while (y != nullptr && x == y -> right) {
+            x = y;
+            y = y -> p;
         }
+    return y -> key;
     }
-    return y -> key
-
 }
 
 /*
