@@ -31,6 +31,10 @@ template <class Data, class Key>
 
 
 // BST operations
+
+
+// INSERT
+
 /*
 Pre-Conditions: 
 Post-Conditions: 
@@ -41,6 +45,7 @@ void BST<Data, Key>::insert(Data d, Key k){
     Node* z = new Node(d,k);
     Node* y = NULL;
     Node* x = root;
+
     while (x != NULL){
         y = x;
         if (k < x->key){
@@ -65,6 +70,8 @@ void BST<Data, Key>::insert(Data d, Key k){
 
 }
 
+
+// SEARCH
 
 /*
 Pre-Conditions: 
@@ -107,7 +114,6 @@ Data BST<Data, Key>::get(Key k){
 }
 
 
-
 /*
 Pre-Conditions: 
 Post-Conditions: 
@@ -144,6 +150,8 @@ void BST<Data, Key>::remove(Key k){
     }
     
 }
+
+
 
 /*
 Pre-Conditions: 
@@ -192,7 +200,27 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Key BST<Data, Key>::successor(Key k){
+    // finding x
+    Node* x = searchNode(k);
+
+    // if x == nullptr, 
+    if (x == nullptr){
+        return Key{}; 
+    }
+
+    if (x -> right != nullptr) {
+        return minimum(x.right) -> key; //key value
+    }
     
+    else {
+        Node* y = x -> p
+        while (y != nullptr && x = y -> right) {
+            x = y
+            y = y -> p
+        }
+    }
+    return y -> key
+
 }
 
 /*
@@ -212,6 +240,11 @@ template <class Data, class Key>
 void BST<Data, Key>::trim(Key low, Key high){
     
 }
+
+
+
+
+
 
 //Utility Operations
 /*
