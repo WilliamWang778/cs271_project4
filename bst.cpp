@@ -218,7 +218,15 @@ Key BST<Data, Key>::successor(Key k){
             x = y;
             y = y -> p;
         }
-    return y -> key;
+    
+    // defending seg fault
+
+    if (y == nullptr) {
+        return Key{};
+    }
+    else {
+        // y is successor
+        return y -> key;
     }
 }
 
