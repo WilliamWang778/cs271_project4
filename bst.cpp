@@ -237,8 +237,7 @@ Post-Conditions:
 */
 template <class Data, class Key>
 std::string BST<Data, Key>::in_order(){
-    std::stringstream ss;
-    in_order_helper(root, ss);
+    std::stringstream ss = in_order_helper(root);
     std::string result = ss.str();
 
     if (!result.empty()) {
@@ -321,16 +320,16 @@ std::string BST<Data, Key>::to_string(){
 
 
 template<class Data, class Key>
-void BST<Data, Key>::in_order_helper(Node* x, std::stringstream& ss) const{
+std::stringstream BST<Data, Key>::in_order_helper(Node* x) const{
     if (x == nullptr) {
-        return
+        return "";
     }
     
     // L -> C -> R
-
-    in_order_helper(x-> left, ss);
+    std::stringstream ss = in_order_helper(x-> left);
     ss << x -> key << " ";
-    in_order_helper(x -> right, ss);
+    ss << in_order_helper(x -> right);
+    return ss;
 }
 
 

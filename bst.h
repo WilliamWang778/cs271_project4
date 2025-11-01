@@ -20,36 +20,23 @@ private:
     //Helping operations
     void FullClear(Node* current);
 
-    const Node* getMinNode(){
-        if(empty()){
-            return NULL;
-        }
-        Node* current = root;
-        while(current->left != NULL){
-            current = current->left;
-        }
-        return current;
-    }
-
-    const Node* getMaxNode(){
-        if(empty()){
-            return NULL;
-        }
-        Node* current = root;
-        while(current->right != NULL){
-            current = current->right;
-        }
-        return current;
-    }
-
-    Node* searchNode(const Key& k) const;
-
-    Node* minimum(Node* x) const{
+    const Node* getMinNode(Node* x = root){
         while (x != NULL && x -> left != NULL){
             x = x -> left;
         }
         return x;
     }
+
+    const Node* getMaxNode(Node* x = root){
+        while (x != NULL && x -> right != NULL){
+            x = x -> right;
+        }
+        return x;
+    }
+
+    std::stringstream in_order_helper(Node* x) const;
+
+    Node* searchNode(const Key& k) const;
 
     void transplant(Node* u, Node* v){
         if (u->p == nullptr) {
