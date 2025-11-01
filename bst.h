@@ -19,6 +19,7 @@ private:
 
     //Helping operations
     void FullClear(Node* current);
+
     const Node* getMinNode(){
         if(empty()){
             return NULL;
@@ -29,6 +30,7 @@ private:
         }
         return current;
     }
+
     const Node* getMaxNode(){
         if(empty()){
             return NULL;
@@ -39,6 +41,7 @@ private:
         }
         return current;
     }
+
     Node* searchNode(const Key& k) const;
 
     Node* minimum(Node* x) const{
@@ -87,6 +90,7 @@ public:
     //Utility Operations
     std::string to_string();
     
+    std::stringstream& ss;
 };
 
 //#endif

@@ -31,6 +31,10 @@ template <class Data, class Key>
 
 
 // BST operations
+
+
+// INSERT
+
 /*
 Pre-Conditions: 
 Post-Conditions: 
@@ -41,6 +45,7 @@ void BST<Data, Key>::insert(Data d, Key k){
     Node* z = new Node(d,k);
     Node* y = NULL;
     Node* x = root;
+
     while (x != NULL){
         y = x;
         if (k < x->key){
@@ -60,6 +65,8 @@ void BST<Data, Key>::insert(Data d, Key k){
 
 }
 
+
+// SEARCH
 
 /*
 Pre-Conditions: 
@@ -102,7 +109,6 @@ Data BST<Data, Key>::get(Key k){
 }
 
 
-
 /*
 Pre-Conditions: 
 Post-Conditions: 
@@ -139,6 +145,8 @@ void BST<Data, Key>::remove(Key k){
     }
     
 }
+
+
 
 /*
 Pre-Conditions: 
@@ -187,7 +195,35 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Key BST<Data, Key>::successor(Key k){
+    // finding x
+    Node* x = searchNode(k);
+
+    // if x == nullptr
+    if (x == nullptr){
+        return Key{}; 
+    }
+
+    if (x -> right != nullptr) {
+        return minimum(x->right) -> key; //key value
+    }
     
+    else {
+        Node* y = x -> p;
+        while (y != nullptr && x == y -> right) {
+            x = y;
+            y = y -> p;
+        }
+        
+        // defending seg fault
+
+        if (y == nullptr) {
+            return Key{};
+        }
+        else {
+            // y is successor
+            return y -> key;
+        }
+    }
 }
 
 /*
@@ -196,6 +232,15 @@ Post-Conditions:
 */
 template <class Data, class Key>
 std::string BST<Data, Key>::in_order(){
+    std::stringstream ss;
+    in_order_helper(root, ss);
+    std::string result = ss.str();
+
+    if (!result.empty()) {
+        result.pop_back();
+    }
+    
+    return result;
     
 }
 
@@ -207,6 +252,11 @@ template <class Data, class Key>
 void BST<Data, Key>::trim(Key low, Key high){
     
 }
+
+
+
+
+
 
 //Utility Operations
 /*
@@ -265,7 +315,28 @@ std::string BST<Data, Key>::to_string(){
 }
 
 
-//healper funciton
+template<class Data, class Key>
+void BST<Data, Key>::in_order_helper(Node* x, std::stringstream& ss) const{
+    if (x == nullptr) {
+        return
+    }
+    
+    // L -> C -> R
+
+    in_order_helper(x-> left, ss);
+    ss << x -> key << " ";
+    in_order_helper(x -> right, ss);
+}
+
+
+
+
+
+
+
+
+
+//helper funciton
 /*
 Pre-Conditions: Current is either a node or NULL
 Post_Conditions: Current and it's children are deleted
