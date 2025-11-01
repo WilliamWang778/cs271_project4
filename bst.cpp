@@ -127,7 +127,7 @@ void BST<Data, Key>::remove(Key k){
         transplant(z, z->left);
         delete z;
     } else {
-        Node* y = minimum(z->right); 
+        Node* y = getMinNode(z->right); 
         if (y->p != z) {
             transplant(y, y->right);
             y->right = z->right;
@@ -204,7 +204,7 @@ Key BST<Data, Key>::successor(Key k){
     }
 
     if (x -> right != nullptr) {
-        return minimum(x->right) -> key; //key value
+        return getMinNode(x->right) -> key; //key value
     }
     
     else {
