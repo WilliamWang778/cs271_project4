@@ -251,7 +251,7 @@ template <class Data, class Key>
 void BST<Data, Key>::trim(Key low, Key high){
     root = trim_helper(root, low, high);
     if (root != nullptr) {
-        root -> p = nullptr
+        root -> p = nullptr;
     }
 }
 
@@ -265,7 +265,7 @@ Post-Conditions: A string with all key from top(root) to bottom(final leaves) fr
 */
 template <class Data, class Key>
 std::string BST<Data, Key>::to_string(){
-    if(node == NULL){
+    if(root == nullptr){
         return "";
     }
 
@@ -284,7 +284,7 @@ std::string BST<Data, Key>::to_string(){
         }
 
         //add all siblings/cousins to the string
-        for(int i=0; i<len(childNodes); i++){
+        for(int i=0; i<childNodes.size(); i++){
             if(first){
                 first = false;
             }else{
@@ -307,7 +307,7 @@ std::string BST<Data, Key>::to_string(){
             childNodes.pop_back();
         }
         //remake kids
-        for(int i=0; i<len(nextChildNodes); i++){
+        for(int i=0; i < nextChildNodes.size(); i++){
             childNodes.push_back(nextChildNodes[i]);
         }
     }
@@ -316,19 +316,20 @@ std::string BST<Data, Key>::to_string(){
 
 
 template<class Data, class Key>
-std::stringstream BST<Data, Key>::in_order_helper(Node* x) const{
+std::stringstream BST<Data, Key>::in_order_helper(Node* x) const {
+    
+    std::stringstream ss; 
+
     if (x == nullptr) {
-        return "";
+        return ss; 
     }
     
-    // L -> C -> R
-    std::stringstream ss = in_order_helper(x-> left);
-    ss << x -> key << " ";
-    ss << in_order_helper(x -> right);
+    ss << in_order_helper(x->left).str();  // L
+    ss << x->key << " ";                   // C
+    ss << in_order_helper(x->right).str(); // R
+    
     return ss;
 }
-
-
 
 
 
