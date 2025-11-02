@@ -107,7 +107,7 @@ BST<Data, Key>::searchNode(const Key& k) const {
 
 
 /*
-Pre-Conditions: The BST is valid. Type Key supports operator< and Data is default-constructible.
+Pre-Conditions: The BST is valid.
 Post-Conditions: If a node with key k exists, returns its data. If a node with key k exists, returns its data.
 */
 template <class Data, class Key>
@@ -119,7 +119,7 @@ Data BST<Data, Key>::get(Key k){
         // return stored data if found
         return x -> data;
     } else {
-        // not found -> default value
+        // not found: default value
         return Data{};
     }
     
@@ -141,17 +141,17 @@ void BST<Data, Key>::remove(Key k){
         return; 
     } 
 
-    // case 1: no left child -> replace z by right child
+    // case 1: no left child: replace z by right child
     if (z->left == nullptr) {
         transplant(z, z->right);
         delete z;
 
-        // Case 2: no right child -> replace z by left child
+        // Case 2: no right child: replace z by left child
     } else if (z->right == nullptr) {
         transplant(z, z->left);
         delete z;
     } else {
-        // Case 3: two children -> use successor
+        // Case 3: two children
         Node* y = getMinNode(z->right); 
         if (y->p != z) {
             // Move y's right child up where y was
