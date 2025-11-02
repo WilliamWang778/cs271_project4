@@ -36,30 +36,39 @@ template <class Data, class Key>
 // INSERT
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: #1 The BST object exists and its attributes are well-formed. #2 Enough memory is available to allocate a new Node.
+Post-Conditions: A new node storing is inserted as a leaf. Parent pointers are updated; the BST property is preserved.
 */
 template <class Data, class Key>
 void BST<Data, Key>::insert(Data d, Key k){
 
+    // allocate new node with (d,k)
     Node* z = new Node(d,k);
     Node* y = NULL;
+    // start from root
     Node* x = root;
 
+    // Walk down the tree to find the insertion spot
     while (x != NULL){
         y = x;
         if (k < x->key){
+            // go left if k is smaller
             x = x -> left;
         } else {
+            // go right if k >= x->key
             x = x -> right;
         } 
     }
+
+    // Link z under y
     z -> p = y;
     if (y == NULL){
         root = z;
     } else if (z -> key < y -> key){
+        // attach as left child
         y -> left = z;
     } else{
+        // attach as right child
         y-> right = z;
     }
 
@@ -69,22 +78,28 @@ void BST<Data, Key>::insert(Data d, Key k){
 // SEARCH
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: The BST structure is valid and satisfies the BST property.
+Post-Conditions:  Returns a pointer to a node whose key == k if found; otherwise returns nullptr.
 */
 template <class Data, class Key>
 typename BST<Data, Key>::Node*
 BST<Data, Key>::searchNode(const Key& k) const {
+
+    // search start at root
     Node* x = root;
     while (x != nullptr) {
+        // search left subtree
         if (k < x->key) {
             x = x->left;
         } else if (x->key < k) {
+            // search right subtree
             x = x->right;
         } else {
+            // found the same match
             return x;  
         }
     }
+    // not found
     return nullptr;
 }
 
@@ -92,16 +107,19 @@ BST<Data, Key>::searchNode(const Key& k) const {
 
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: The BST is valid. Type Key supports operator< and Data is default-constructible.
+Post-Conditions: If a node with key k exists, returns its data. If a node with key k exists, returns its data.
 */
 template <class Data, class Key>
 Data BST<Data, Key>::get(Key k){
 
+    // locate node with key k
     Node* x = searchNode(k);
     if (x != NULL){
+        // return stored data if found
         return x -> data;
     } else {
+        // not found -> default value
         return Data{};
     }
     
@@ -110,33 +128,44 @@ Data BST<Data, Key>::get(Key k){
 
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: The BST is valid and obeys the BST property. Type Key supports operator<.
+Post-Conditions:If a node with key k exists, removes one occurrence from the tree, deallocates 
+that node, and preserves the BST property If no such node exists, the tree is unchanged.
 */
 template <class Data, class Key>
 void BST<Data, Key>::remove(Key k){
+
+    // find node to delete
     Node* z = searchNode(k);
     if (!z) {
         return; 
     } 
 
+    // case 1: no left child -> replace z by right child
     if (z->left == nullptr) {
         transplant(z, z->right);
         delete z;
+
+        // Case 2: no right child -> replace z by left child
     } else if (z->right == nullptr) {
         transplant(z, z->left);
         delete z;
     } else {
+        // Case 3: two children -> use successor
         Node* y = getMinNode(z->right); 
         if (y->p != z) {
+            // Move y's right child up where y was
             transplant(y, y->right);
+            // Put z's right subtree under y
             y->right = z->right;
             if (y->right != NULL){
                 y -> right -> p = y;
             }
             
         }
+        // replace z with y
         transplant(z, y);
+        // attach z's left subtree under y
         y->left = z->left;
         if (y->left != NULL){
             y->left->p = y;
