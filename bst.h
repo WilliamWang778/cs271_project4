@@ -51,6 +51,51 @@ private:
         }
     }
     
+    Node* trim_helper(Node* x, Key low, Key high) {
+        if (x == nullptr) {
+            return nullptr;
+        }
+
+        if (x->key < low) {
+            Node* new_root_from_right = trim_helper(x->right, low, high);
+            FullClear(x->left);
+            x->left = nullptr;
+            x->right = nullptr;
+            delete x;
+            return new_root_from_right;
+        
+        }
+
+        if (x->key > high) {
+
+            Node* new_root_from_left = trim_helper(x->left, low, high);
+
+            FullClear(x->right);
+
+            x->left = nullptr;
+            x->right = nullptr;
+
+            delete x;
+
+            return new_root_from_left;
+        }
+
+        x->left = trim_helper(x->left, low, high);
+        x->right = trim_helper(x->right, low, high);
+
+        if (x->left != nullptr) {
+            
+            x->left->p = x;
+        }
+
+        if (x->right != nullptr) {
+
+            x->right->p = x;
+        }
+
+        return x;
+
+    }
     
 
 public:

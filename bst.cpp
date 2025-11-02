@@ -249,10 +249,11 @@ Post-Conditions:
 */
 template <class Data, class Key>
 void BST<Data, Key>::trim(Key low, Key high){
-    
+    root = trim_helper(root, low, high);
+    if (root != nullptr) {
+        root -> p = nullptr
+    }
 }
-
-
 
 
 
