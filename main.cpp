@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#include "bst.h"
 #include "usecase.cpp"
 
 
