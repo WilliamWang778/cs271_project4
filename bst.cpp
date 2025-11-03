@@ -222,7 +222,7 @@ template <class Data, class Key>
 Key BST<Data, Key>::max_key(){
     Node* max = getMaxNode(root);
     if(max == nullptr){
-        return Data{};
+        return Key{};
     }
     return(max->key);
 }
@@ -248,7 +248,7 @@ template <class Data, class Key>
 Key BST<Data, Key>::min_key(){
     Node* min = getMinNode(root);
     if(min == nullptr){
-        return Data{};
+        return Key{};
     }
     return(min->key);
 }
