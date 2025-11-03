@@ -4,6 +4,10 @@
 #include "bst.cpp"
 using namespace std;
 
+/*
+Pre-Conditions: fname is a file name, and data and class are strings
+Post_Conditions: BST from the file is made
+*/
 template <class Data = string, class Key = string>
 BST<Data, Key>* create_bst(string fname){
     BST<Data, Key> *bst = new BST<Data, Key>();
@@ -22,6 +26,10 @@ BST<Data, Key>* create_bst(string fname){
     return bst;
 }
 
+/*
+Pre-Conditions: Types for data and key are the same (string) and bin contains only 1's + 0's
+Post_Conditions: The hex code from the binary given is returned as a string
+*/
 template <class Data, class Key>
 string convert(BST<Data, Key>*bst, string bin){
     while(bin.length()%4 != 0){

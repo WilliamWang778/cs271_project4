@@ -202,8 +202,8 @@ void BST<Data, Key>::remove(Key k){
 
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: None
+Post-Conditions: returns data of Max if not null
 */
 template <class Data, class Key>
 Data BST<Data, Key>::max_data(){
@@ -215,8 +215,8 @@ Data BST<Data, Key>::max_data(){
 }
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: None
+Post-Conditions: returns key of Max if not null
 */
 template <class Data, class Key>
 Key BST<Data, Key>::max_key(){
@@ -228,8 +228,8 @@ Key BST<Data, Key>::max_key(){
 }
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: None
+Post-Conditions: returns data of Min if not null
 */
 template <class Data, class Key>
 Data BST<Data, Key>::min_data(){
@@ -241,8 +241,8 @@ Data BST<Data, Key>::min_data(){
 }
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: None
+Post-Conditions: returns key of Min if not null
 */
 template <class Data, class Key>
 Key BST<Data, Key>::min_key(){
