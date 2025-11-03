@@ -42,15 +42,17 @@ Post-Conditions: A new node storing (d,k) is inserted as a leaf. The BST orderin
 template <class Data, class Key>
 void BST<Data, Key>::insert(Data d, Key k){
 
+    // Create the new node
     Node* z = new Node();
-    z -> d = data;
-    z -> k = key;
+    z -> data = d;
+    z -> key = k;
 
+    // track parent of the insertion spot
     Node* y = nullptr;
-    // start from root
-    Node* y = nullptr;
+    // start from the root
     Node* x = root;
 
+    // walk down the tree to find where to insert
     while (x != nullptr){
         y = x;
         if (k < x->key){
@@ -59,6 +61,8 @@ void BST<Data, Key>::insert(Data d, Key k){
             x = x -> right;
         } 
     }
+
+    // Link the new node under its parent
     z -> p = y;
     if (y == nullptr){
         root = z;
@@ -74,18 +78,22 @@ void BST<Data, Key>::insert(Data d, Key k){
 // SEARCH
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: Type Key supports operator<.
+Post-Conditions: Returns a pointer to the node whose key == k if found; otherwise returns nullptr.
 */
 template <class Data, class Key>
 typename BST<Data, Key>::Node*
 BST<Data, Key>::searchNode(const Key& k) const {
+    // start at root
     Node* x = root;
     while (x != nullptr) {
+        // search left if k is smaller
         if (k < x->key) {
             x = x->left;
+            // search right if k is larger
         } else if (x->key < k) {
             x = x->right;
+            // equal: found the key
         } else {
             return x;  
         }
@@ -97,13 +105,15 @@ BST<Data, Key>::searchNode(const Key& k) const {
 
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: Type Key supports operator<.
+Post-Conditions: If a node with key k exists, its data is returned.
 */
 template <class Data, class Key>
 Data BST<Data, Key>::get(Key k){
-
+    // Find the node with key k
     Node* x = searchNode(k);
+
+    // If found, return its data; otherwise return default value
     if (x != nullptr){
         return x -> data;
     } else {
@@ -121,19 +131,25 @@ that node, and preserves the BST property If no such node exists, the tree is un
 */
 template <class Data, class Key>
 void BST<Data, Key>::remove(Key k){
+
+    // Find the node to delete
     Node* z = searchNode(k);
     if (!z) {
         return; 
     } 
-
+    // Case 1: no left child
     if (z->left == nullptr) {
         transplant(z, z->right);
         delete z;
+        // Case 2: no right child
     } else if (z->right == nullptr) {
         transplant(z, z->left);
         delete z;
+        // Case 3: two children
     } else {
         Node* y = getMinNode(z->right); 
+
+        // If successor y is not the direct right child of z
         if (y->p != z) {
             transplant(y, y->right);
             y->right = z->right;
@@ -142,7 +158,9 @@ void BST<Data, Key>::remove(Key k){
             }
             
         }
+        // Replace z with y
         transplant(z, y);
+        // Hook z's left subtree under y
         y->left = z->left;
         if (y->left != nullptr){
             y->left->p = y;
