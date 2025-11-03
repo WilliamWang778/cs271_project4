@@ -21,6 +21,9 @@ private:
     void FullClear(Node* current);
     void DeepCopy(const BST& other);
 
+    const Node* getMinNode(Node* x){
+        while (x != NULL && x -> left != NULL){
+            x = x -> left;
     // const Node* getMinNode(Node* x = root){
     //     while (x != NULL && x -> left != NULL){
     //         x = x -> left;
@@ -45,7 +48,7 @@ private:
 
 
 
-    const Node* getMaxNode(Node* x = root){
+    const Node* getMaxNode(Node* x){
         while (x != NULL && x -> right != NULL){
             x = x -> right;
         }

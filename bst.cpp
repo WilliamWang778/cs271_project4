@@ -205,7 +205,7 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Data BST<Data, Key>::max_data(){
-    Node* max = getMaxNode();
+    Node* max = getMaxNode(root);
     if(max == NULL){
         return Data{};
     }
@@ -218,7 +218,7 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Key BST<Data, Key>::max_key(){
-    Node* max = getMaxNode();
+    Node* max = getMaxNode(root);
     if(max == NULL){
         return Data{};
     }
@@ -231,7 +231,7 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Data BST<Data, Key>::min_data(){
-    Node* min = getMinNode();
+    Node* min = getMinNode(root);
     if(min == NULL){
         return Data{};
     }
@@ -244,7 +244,7 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Key BST<Data, Key>::min_key(){
-    Node* min = getMinNode();
+    Node* min = getMinNode(root);
     if(min == NULL){
         return Data{};
     }
