@@ -93,16 +93,76 @@ void test_min_key(){
     }
 }
 
-void test_successor(){
+void test_successor()
+{
+    try
+    {
+        int vals[10] = {5, 2, 7, 1, 3, 4, 6, 9, 8, 10};
 
+        BST<string, int> balanced_bst;
+
+        for (int i = 0; i < 10; i++) {
+            balanced_bst.insert(to_string(vals[i]) + " data", vals[i]);
+        }
+
+        int succ = balanced_bst.successor(4);
+
+        if (succ != 5){
+            cout << "Incorrect result of successor of 4. Expected 5 but got : " << succ << endl;
+        }
+
+        succ = balanced_bst.successor(7);
+
+        if (succ != 8) {
+            cout << "Incorrect result of successor of 7. Expected 8 but got : " << succ << endl;
+        }
+        // if successor 10 
+        succ = balanced_bst.successor(10); 
+        if (succ != 0) {
+            cout << "Incorrect result of successor of 10. Expected 0 but got : " << succ << endl;
+        }
+    }
+    catch (exception &e) {
+        cerr << "Error in determining successor in bst : " << e.what() << endl;
+    }
 }
 
-void test_in_order(){
-
+void test_in_order()
+{
+    try
+    {
+        BST<string, int> bst;
+        for (int i = 1; i <= 10; i++)
+        {
+            bst.insert("some data", i);
+        }
+        string bst_str = bst.in_order();
+        if (bst_str != "1 2 3 4 5 6 7 8 9 10")
+        {
+            cout << "Incorrect in_order result after inserting keys 1-10 in order. Expected 1 2 3 4 5 6 7 8 9 10 but got : " << bst_str << endl;
+        }
+        
+        int vals[10] = {5, 2, 7, 1, 3, 4, 6, 9, 8, 10};
+        BST<string, int> balanced_bst;
+        for (int i = 0; i < 10; i++)
+        {
+            balanced_bst.insert("some data", vals[i]);
+        }
+        bst_str = balanced_bst.in_order();
+        if (bst_str != "1 2 3 4 5 6 7 8 9 10")
+        {
+            cout << "Incorrect in_order result after inserting keys {5, 2, 7, 1, 3, 4, 6, 9, 8, 10}. Expected 1 2 3 4 5 6 7 8 9 10 but got : " << bst_str << endl;
+        }
+    }
+    catch (exception &e)
+    {
+        cerr << "Error getting keys in_order from bst : " << e.what() << endl;
+    }
 }
 
-void test_trim(){
+void test_trim() {
 
+    
 }
 
 void test_usecase(){
