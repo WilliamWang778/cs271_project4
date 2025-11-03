@@ -19,6 +19,7 @@ private:
 
     //Helping operations
     void FullClear(Node* current);
+    void DeepCopy(const BST& other);
 
     const Node* getMinNode(Node* x = root){
         while (x != NULL && x -> left != NULL){
@@ -105,6 +106,10 @@ public:
 
     //Deconstructor
 	~BST (void);
+
+    //Copy constructor and operator equals
+    BST(const BST& other);
+    BST<Data, Key>& operator=(const BST& other);
 
     //BST operations
     bool empty(){return root == NULL;}
