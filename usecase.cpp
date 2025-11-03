@@ -4,7 +4,7 @@
 #include "bst.cpp"
 using namespace std;
 
-template <class Data, class Key>
+template <class Data = string, class Key = string>
 BST<Data, Key>* create_bst(string fname){
     BST<Data, Key> *bst = new BST<Data, Key>();
     ifstream file(fname);
