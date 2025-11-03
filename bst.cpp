@@ -36,14 +36,22 @@ template <class Data, class Key>
 // INSERT
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: The BST object exists. Type Key supports operator<.
+Post-Conditions: A new node storing (d,k) is inserted as a leaf. The BST ordering property is preserved.
 */
 template <class Data, class Key>
 void BST<Data, Key>::insert(Data d, Key k){
 
+    Node* z = new Node();
+    z -> d = data;
+    z -> k = key;
+
+    Node* y = nullptr;
+    // start from root
+    Node* y = nullptr;
     Node* x = root;
 
+    while (x != nullptr){
         y = x;
         if (k < x->key){
             x = x -> left;
@@ -52,6 +60,7 @@ void BST<Data, Key>::insert(Data d, Key k){
         } 
     }
     z -> p = y;
+    if (y == nullptr){
         root = z;
     } else if (z -> key < y -> key){
         y -> left = z;
@@ -95,6 +104,7 @@ template <class Data, class Key>
 Data BST<Data, Key>::get(Key k){
 
     Node* x = searchNode(k);
+    if (x != nullptr){
         return x -> data;
     } else {
         return Data{};
@@ -127,12 +137,14 @@ void BST<Data, Key>::remove(Key k){
         if (y->p != z) {
             transplant(y, y->right);
             y->right = z->right;
+            if (y->right != nullptr){
                 y -> right -> p = y;
             }
             
         }
         transplant(z, y);
         y->left = z->left;
+        if (y->left != nullptr){
             y->left->p = y;
         }
         delete z;
