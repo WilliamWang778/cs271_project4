@@ -42,11 +42,8 @@ Post-Conditions:
 template <class Data, class Key>
 void BST<Data, Key>::insert(Data d, Key k){
 
-    Node* z = new Node(d,k);
-    Node* y = NULL;
     Node* x = root;
 
-    while (x != NULL){
         y = x;
         if (k < x->key){
             x = x -> left;
@@ -55,7 +52,6 @@ void BST<Data, Key>::insert(Data d, Key k){
         } 
     }
     z -> p = y;
-    if (y == NULL){
         root = z;
     } else if (z -> key < y -> key){
         y -> left = z;
@@ -99,7 +95,6 @@ template <class Data, class Key>
 Data BST<Data, Key>::get(Key k){
 
     Node* x = searchNode(k);
-    if (x != NULL){
         return x -> data;
     } else {
         return Data{};
@@ -132,14 +127,12 @@ void BST<Data, Key>::remove(Key k){
         if (y->p != z) {
             transplant(y, y->right);
             y->right = z->right;
-            if (y->right != NULL){
                 y -> right -> p = y;
             }
             
         }
         transplant(z, y);
         y->left = z->left;
-        if (y->left != NULL){
             y->left->p = y;
         }
         delete z;
