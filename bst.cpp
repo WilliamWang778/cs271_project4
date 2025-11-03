@@ -65,7 +65,9 @@ template <class Data, class Key>
 void BST<Data, Key>::insert(Data d, Key k){
 
     // allocate new node with (d,k)
-    Node* z = new Node(d,k);
+    Node* z = new Node();
+    z->data = d;
+    z->key = k;
     Node* y = nullptr;
     // start from root
     Node* x = root;
