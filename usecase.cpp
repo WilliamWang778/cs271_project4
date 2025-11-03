@@ -33,9 +33,8 @@ string convert(BST<Data, Key>*bst, string bin){
         string key = bin.substr(0,4);
         bin = bin.substr(4);
 
-        retHex = retHex + bst.get(key);
+        retHex = retHex + bst->get(key); 
     }
 
     return retHex;
 }
-
