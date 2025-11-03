@@ -64,7 +64,7 @@ Post-Conditions: A new node storing is inserted as a leaf. Parent pointers are u
 template <class Data, class Key>
 void BST<Data, Key>::insert(Data d, Key k){
 
-    // allocate new node with (d,k)
+    // allocate new node with 
     Node* z = new Node();
     z->data = d;
     z->key = k;
