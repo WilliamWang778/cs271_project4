@@ -194,9 +194,101 @@ void test_in_order()
     }
 }
 
-void test_trim() {
+void test_trim()
+{
+    try
+    {
+        // --- Test 1 ---
+        BST<string, int> bst;
 
-    
+        int vals[3] = {1, 0, 2}; // to_string(): "1 0 2"
+        for (int i = 0; i < 3; i++) {
+            bst.insert(to_string(vals[i]) + " data", vals[i]);
+        }
+
+        bst.trim(1, 2); // [1,2]
+
+        string bst_str = bst.to_string();
+
+        if (bst_str != "1 2") 
+        {
+            cout << "Incorrect tree after trimming 1 0 2 with low=1, high=2. Expected 1 2 but got : " << bst_str << endl;
+        }
+        
+        // --- Test 2 ---
+        BST<string, int> bst2;
+
+        int vals2[5] = {3, 0, 4, 2, 1}; // to_string(): "3 0 4 2 1"
+        for (int i = 0; i < 5; i++){
+            bst2.insert(to_string(vals2[i]) + " data", vals2[i]);
+        }
+
+        bst2.trim(1, 3); // [1, 3]
+        bst_str = bst2.to_string();
+        if (bst_str != "3 2 1") {
+            cout << "Incorrect tree after trimming 3 0 4 2 1 with low=1, high=3. Expected 3 2 1 but got : " << bst_str << endl;
+        }
+
+        // --- Test 3: Removing root node and right subtree ---
+        BST<string, int> bst3;
+        int vals3[7] = {10, 5, 15, 3, 7, 12, 18}; // to_string(): "10 5 15 3 7 12 18"
+        for (int i = 0; i < 7; i++)
+        {
+            bst3.insert(to_string(vals3[i]) + " data", vals3[i]);
+        }
+        bst3.trim(1, 9); // [1, 9]. New root should be 5.
+        bst_str = bst3.to_string();
+        if (bst_str != "5 3 7")
+        {
+            cout << "Incorrect tree after trimming (low) 10 5 15 3 7 12 18 with low=1, high=9. Expected 5 3 7 but got : " << bst_str << endl;
+        }
+
+        // --- Test 4: Removing root node and left subtree ---
+        BST<string, int> bst4;
+        int vals4[7] = {10, 5, 15, 3, 7, 12, 18}; // to_string(): "10 5 15 3 7 12 18"
+        for (int i = 0; i < 7; i++)
+        {
+            bst4.insert(to_string(vals4[i]) + " data", vals4[i]);
+        }
+        bst4.trim(11, 20); // [11, 20], new root should be 15
+        bst_str = bst4.to_string();
+        if (bst_str != "15 12 18")
+        {
+            cout << "Incorrect tree after trimming (high) 10 5 15 3 7 12 18 with low=11, high=20. Expected 15 12 18 but got : " << bst_str << endl;
+        }
+
+        // --- Test 5: Removing all tree ---
+        BST<string, int> bst5;
+        int vals5[3] = {10, 5, 15}; // to_string(): "10 5 15"
+        for (int i = 0; i < 3; i++)
+        {
+            bst5.insert(to_string(vals5[i]) + " data", vals5[i]);
+        }
+        bst5.trim(100, 200); // Out of range
+        bst_str = bst5.to_string();
+        if (bst_str != "") // Tree should be empty.
+        {
+            cout << "Incorrect tree after trimming all. Expected \"\" (empty string) but got : " << bst_str << endl;
+        }
+
+        // --- Test 6: Removing nothing ---
+        BST<string, int> bst6;
+        int vals6[3] = {10, 5, 15}; // to_string(): "10 5 15"
+        for (int i = 0; i < 3; i++)
+        {
+            bst6.insert(to_string(vals6[i]) + " data", vals6[i]);
+        }
+        bst6.trim(1, 20); // All nodes are inside [1, 20]
+        bst_str = bst6.to_string();
+        if (bst_str != "10 5 15")
+        {
+            cout << "Incorrect tree after trimming nothing. Expected \"10 5 15\" but got : " << bst_str << endl;
+        }
+    }
+    catch (exception &e)
+    {
+        cerr << "Error in trimming the bst : " << e.what() << endl;
+    }
 }
 
 void test_usecase(){
