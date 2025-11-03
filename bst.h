@@ -24,23 +24,6 @@ private:
     const Node* getMinNode(Node* x){
         while (x != NULL && x -> left != NULL){
             x = x -> left;
-    // const Node* getMinNode(Node* x = root){
-    //     while (x != NULL && x -> left != NULL){
-    //         x = x -> left;
-    //     }
-    //     return x;
-    // }
-
-    Node* getMinNode() { 
-        return minimum(root); 
-    }
-
-    Node* minimum(Node* x) const {
-        if (x == nullptr) {
-            return nullptr;
-        }
-        while (x->left != nullptr) {
-            x = x->left;
         }
         return x;
     }
