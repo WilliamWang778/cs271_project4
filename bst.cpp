@@ -16,7 +16,7 @@ Post_Conditions: start for tree. root is NULL
 */
 template <class Data, class Key>
     BST<Data, Key>::BST(void){
-        root = NULL;
+        root = nullptr;
 }
 
 // Destructor
@@ -36,7 +36,7 @@ Post_Conditions: Tree is a perfect copy of other in the same order
 */
 template <class Data, class Key>
     BST<Data, Key>::BST(const BST& other){
-        root = NULL;
+        root = nullptr;
         DeepCopy();
 }
 
@@ -48,7 +48,7 @@ Post_Conditions: Tree is a perfect copy of other in the same order
 template <class Data, class Key>
     BST<Data, Key>& BST<Data, Key>::operator=(const BST& other){
         FullClear(root);
-        root = NULL;
+        root = nullptr;
         DeepCopy();
 }
 
@@ -66,12 +66,12 @@ void BST<Data, Key>::insert(Data d, Key k){
 
     // allocate new node with (d,k)
     Node* z = new Node(d,k);
-    Node* y = NULL;
+    Node* y = nullptr;
     // start from root
     Node* x = root;
 
     // Walk down the tree to find the insertion spot
-    while (x != NULL){
+    while (x != nullptr){
         y = x;
         if (k < x->key){
             // go left if k is smaller
@@ -84,7 +84,7 @@ void BST<Data, Key>::insert(Data d, Key k){
 
     // Link z under y
     z -> p = y;
-    if (y == NULL){
+    if (y == nullptr){
         root = z;
     } else if (z -> key < y -> key){
         // attach as left child
@@ -137,7 +137,7 @@ Data BST<Data, Key>::get(Key k){
 
     // locate node with key k
     Node* x = searchNode(k);
-    if (x != NULL){
+    if (x != nullptr){
         // return stored data if found
         return x -> data;
     } else {
@@ -180,7 +180,7 @@ void BST<Data, Key>::remove(Key k){
             transplant(y, y->right);
             // Put z's right subtree under y
             y->right = z->right;
-            if (y->right != NULL){
+            if (y->right != nullptr){
                 y -> right -> p = y;
             }
             
@@ -189,7 +189,7 @@ void BST<Data, Key>::remove(Key k){
         transplant(z, y);
         // attach z's left subtree under y
         y->left = z->left;
-        if (y->left != NULL){
+        if (y->left != nullptr){
             y->left->p = y;
         }
         delete z;
@@ -205,8 +205,8 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Data BST<Data, Key>::max_data(){
-    Node* max = getMaxNode();
-    if(max == NULL){
+    Node* max = getMaxNode(root);
+    if(max == nullptr){
         return Data{};
     }
     return(max->data);
@@ -218,8 +218,8 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Key BST<Data, Key>::max_key(){
-    Node* max = getMaxNode();
-    if(max == NULL){
+    Node* max = getMaxNode(root);
+    if(max == nullptr){
         return Data{};
     }
     return(max->key);
@@ -231,8 +231,8 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Data BST<Data, Key>::min_data(){
-    Node* min = getMinNode();
-    if(min == NULL){
+    Node* min = getMinNode(root);
+    if(min == nullptr){
         return Data{};
     }
     return(min->data);
@@ -244,8 +244,8 @@ Post-Conditions:
 */
 template <class Data, class Key>
 Key BST<Data, Key>::min_key(){
-    Node* min = getMinNode();
-    if(min == NULL){
+    Node* min = getMinNode(root);
+    if(min == nullptr){
         return Data{};
     }
     return(min->key);
@@ -355,10 +355,10 @@ std::string BST<Data, Key>::to_string(){
             ss << childNodes[i]->key;
 
             //potental kids stored
-            if(childNodes[i]->left != NULL){
+            if(childNodes[i]->left != nullptr){
                 nextChildNodes.push_back(childNodes[i]->left);
             }
-            if(childNodes[i]->right != NULL){
+            if(childNodes[i]->right != nullptr){
                 nextChildNodes.push_back(childNodes[i]->right);
             }
         }
@@ -402,7 +402,7 @@ Post_Conditions: Current and it's children are deleted
 */
 template <class Data, class Key>
 void BST<Data, Key>::FullClear(Node* current){
-    if(current == NULL){
+    if(current == nullptr){
         return;
     }
     FullClear(current->left);
@@ -430,13 +430,13 @@ void BST<Data, Key>::DeepCopy(const BST& other){
 
         //Insert each row at a time
         for(int i=0; i<Copying.size(); i++){
-            this.insert(Copying[i]->data, Copying[i]->key);
+            insert(Copying[i]->data, Copying[i]->key);
 
             //Next row saved to do
-            if(Copying[i]->left != NULL){
+            if(Copying[i]->left != nullptr){
                 nextToCopy.push_back(Copying[i]->left);
             }
-            if(Copying[i]->right != NULL){
+            if(Copying[i]->right != nullptr){
                 nextToCopy.push_back(Copying[i]->right);
             }
         }

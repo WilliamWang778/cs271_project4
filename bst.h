@@ -21,15 +21,15 @@ private:
     void FullClear(Node* current);
     void DeepCopy(const BST& other);
 
-    const Node* getMinNode(Node* x = root){
-        while (x != NULL && x -> left != NULL){
+    Node* getMinNode(Node* x){
+        while (x != nullptr && x -> left != nullptr){
             x = x -> left;
         }
         return x;
     }
 
-    const Node* getMaxNode(Node* x = root){
-        while (x != NULL && x -> right != NULL){
+    Node* getMaxNode(Node* x){
+        while (x != nullptr && x -> right != nullptr){
             x = x -> right;
         }
         return x;
@@ -112,7 +112,7 @@ public:
     BST<Data, Key>& operator=(const BST& other);
 
     //BST operations
-    bool empty(){return root == NULL;}
+    bool empty(){return root == nullptr;}
     void insert(Data d, Key k);
     Data get(Key k);
     void remove(Key k);
@@ -127,7 +127,7 @@ public:
     //Utility Operations
     std::string to_string();
     
-    std::stringstream& ss;
+    
 };
 
 //#endif
