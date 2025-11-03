@@ -20,7 +20,7 @@ void test_empty(){
     }
     catch (exception &e)
     {
-        cerr << "Error getting keys in_order from bst : " << e.what() << endl;
+        cerr << "Error testng empty from bst : " << e.what() << endl;
     }
 }
 
@@ -55,7 +55,7 @@ void test_max_data(){
     }
     catch (exception &e)
     {
-        cerr << "Error getting keys in_order from bst : " << e.what() << endl;
+        cerr << "Error getting max data from bst : " << e.what() << endl;
     }
 }
 
@@ -78,7 +78,7 @@ void test_max_key(){
     }
     catch (exception &e)
     {
-        cerr << "Error getting keys in_order from bst : " << e.what() << endl;
+        cerr << "Error getting max key from bst : " << e.what() << endl;
     }
 }
 
@@ -101,7 +101,7 @@ void test_min_data(){
     }
     catch (exception &e)
     {
-        cerr << "Error getting keys in_order from bst : " << e.what() << endl;
+        cerr << "Error getting min data from bst : " << e.what() << endl;
     }
 }
 
@@ -123,7 +123,7 @@ void test_min_key(){
         }
     }
     catch (exception &e) {
-        cerr << "Error in determining successor in bst : " << e.what() << endl;
+        cerr << "Error getting min key from bst : " << e.what() << endl;
     }
 }
 
@@ -312,7 +312,7 @@ void test_usecase(){
     }
     catch (exception &e)
     {
-        cerr << "Error getting keys in_order from bst : " << e.what() << endl;
+        cerr << "Error usecase from bst : " << e.what() << endl;
     }
 }
 
