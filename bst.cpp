@@ -152,7 +152,7 @@ Data BST<Data, Key>::get(Key k){
 
 
 /*
-Pre-Conditions: The BST is valid and obeys the BST property. Type Key supports operator<.
+Pre-Conditions: The BST is valid and obeys the BST property. 
 Post-Conditions:If a node with key k exists, removes one occurrence from the tree, deallocates 
 that node, and preserves the BST property If no such node exists, the tree is unchanged.
 */
