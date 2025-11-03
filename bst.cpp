@@ -194,7 +194,6 @@ Key BST<Data, Key>::min_key(){
     Node* min = getMinNode(root);
     if(min == nullptr){
         return Key{};
-        return Key{};
     }
     return(min->key);
 }
