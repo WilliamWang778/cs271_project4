@@ -51,7 +51,8 @@
         "xloctime": "cpp",
         "xtr1common": "cpp",
         "vector": "cpp",
-        "__node_handle": "cpp"
+        "__node_handle": "cpp",
+        "fstream": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }
