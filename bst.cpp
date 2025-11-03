@@ -174,7 +174,7 @@ void BST<Data, Key>::remove(Key k){
         delete z;
     } else {
         // Case 3: two children
-        Node* y = getMinNode(z->right); 
+        Node* y = minimum(z->right); 
         if (y->p != z) {
             // Move y's right child up where y was
             transplant(y, y->right);

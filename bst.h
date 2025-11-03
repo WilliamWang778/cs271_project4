@@ -21,12 +21,29 @@ private:
     void FullClear(Node* current);
     void DeepCopy(const BST& other);
 
-    const Node* getMinNode(Node* x = root){
-        while (x != NULL && x -> left != NULL){
-            x = x -> left;
+    // const Node* getMinNode(Node* x = root){
+    //     while (x != NULL && x -> left != NULL){
+    //         x = x -> left;
+    //     }
+    //     return x;
+    // }
+
+    Node* getMinNode() { 
+        return minimum(root); 
+    }
+
+    Node* minimum(Node* x) const {
+        if (x == nullptr) {
+            return nullptr;
+        }
+        while (x->left != nullptr) {
+            x = x->left;
         }
         return x;
     }
+
+
+
 
     const Node* getMaxNode(Node* x = root){
         while (x != NULL && x -> right != NULL){
@@ -34,6 +51,8 @@ private:
         }
         return x;
     }
+
+
 
     std::stringstream in_order_helper(Node* x) const;
 
