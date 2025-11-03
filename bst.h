@@ -131,8 +131,6 @@ public:
 
     //Utility Operations
     std::string to_string();
-    
-    std::stringstream& ss;
 };
 
 //#endif

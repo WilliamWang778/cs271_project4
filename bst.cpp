@@ -430,7 +430,7 @@ void BST<Data, Key>::DeepCopy(const BST& other){
 
         //Insert each row at a time
         for(int i=0; i<Copying.size(); i++){
-            this.insert(Copying[i]->data, Copying[i]->key);
+            insert(Copying[i]->data, Copying[i]->key);
 
             //Next row saved to do
             if(Copying[i]->left != nullptr){
