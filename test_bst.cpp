@@ -554,7 +554,7 @@ void test_min_data(){
         tester.insert(-10,-12);
         tester.insert(-3,-17);
         tester.insert(-7,-13);
-        if(tester.max_data() != -3){
+        if(tester.min_data() != -3){
             cout << "Min data on zigzag tree failed. Expected -3 but got: " << tester.min_data() << endl;
             cout << "From the tree: " << tester.to_string() << endl;
         }
@@ -766,7 +766,7 @@ void test_usecase(){
         }
 
         bin = "10011011110001001010010101011111000010100";
-        if(convert(binHex, bin) != "1"){
+        if(convert(binHex, bin) != "137894ABE14"){
             cout << "Usecase failed. Expected \"137894ABE14\" but got: " << convert(binHex, bin) << endl;
         }
     }
