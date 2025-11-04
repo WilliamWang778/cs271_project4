@@ -13,7 +13,6 @@ private:
         Node* left;
         Node* right;
         Node* p;
-        //Node(Data d, Key k) : data(d), key(k), left(nullptr), right(nullptr), p(nullptr) {}
     };
 
     Node* root;
