@@ -792,5 +792,7 @@ int main(){
     test_trim();
     test_usecase();
 
+    cout << "Testing completed" << endl;
+
     return 0;
 }
