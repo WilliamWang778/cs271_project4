@@ -755,16 +755,19 @@ void test_usecase(){
     try
     {
         BST<string, string>* binHex = create_bst("binhex.txt");
+        //test empty
         string bin = "";
         if(convert(binHex, bin) != ""){
             cout << "Usecase failed. Expected \"\" but got: " << convert(binHex, bin) << endl;
         }
 
+        //test lacking 0's
         bin = "1";
         if(convert(binHex, bin) != "1"){
             cout << "Usecase failed. Expected \"1\" but got: " << convert(binHex, bin) << endl;
         }
 
+        //test lacking 0's and is long
         bin = "10011011110001001010010101011111000010100";
         if(convert(binHex, bin) != "137894ABE14"){
             cout << "Usecase failed. Expected \"137894ABE14\" but got: " << convert(binHex, bin) << endl;
