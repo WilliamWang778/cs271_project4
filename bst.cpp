@@ -29,6 +29,29 @@ template <class Data, class Key>
         FullClear(root);
 }
 
+// Copy constructor
+/*
+Pre-Conditions: Other has the same template types
+Post_Conditions: Tree is a perfect copy of other in the same order
+*/
+template <class Data, class Key>
+    BST<Data, Key>::BST(const BST& other){
+        root = nullptr;
+        DeepCopy();
+}
+
+// Operator=
+/*
+Pre-Conditions: Other has the same template types
+Post_Conditions: Tree is a perfect copy of other in the same order
+*/
+template <class Data, class Key>
+    BST<Data, Key>& BST<Data, Key>::operator=(const BST& other){
+        FullClear(root);
+        root = nullptr;
+        DeepCopy();
+}
+
 
 // BST operations
 
@@ -385,5 +408,46 @@ void BST<Data, Key>::FullClear(Node* current){
     delete current;
     return;
 }
+
+/*
+Pre-Conditions: Root is null, AND they are of the same data and key type
+Post_Conditions: Full copy of other
+*/
+template <class Data, class Key>
+void BST<Data, Key>::DeepCopy(const BST& other){
+    
+    vector<Node*> Copying = {other.root};
+    vector<Node*> nextToCopy;
+    bool first = true;
+
+    //ends when there are no parts
+    while(!Copying.empty()){
+
+        //clears NextCopies
+        nextToCopy.clear();
+
+        //Insert each row at a time
+        for(int i=0; i<Copying.size(); i++){
+            insert(Copying[i]->data, Copying[i]->key);
+
+            //Next row saved to do
+            if(Copying[i]->left != nullptr){
+                nextToCopy.push_back(Copying[i]->left);
+            }
+            if(Copying[i]->right != nullptr){
+                nextToCopy.push_back(Copying[i]->right);
+            }
+        }
+
+        //empty current row
+        Copying.clear();
+        
+        //remake row
+        Copying = nextToCopy;
+    }
+    
+    return;
+}
+
 
 #endif
