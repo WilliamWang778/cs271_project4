@@ -16,7 +16,7 @@ Post_Conditions: start for tree. root is NULL
 */
 template <class Data, class Key>
     BST<Data, Key>::BST(void){
-        root = NULL;
+        root = nullptr;
 }
 
 // Destructor
@@ -350,10 +350,10 @@ std::string BST<Data, Key>::to_string(){
             ss << childNodes[i]->key;
 
             //potental kids stored
-            if(childNodes[i]->left != NULL){
+            if(childNodes[i]->left != nullptr){
                 nextChildNodes.push_back(childNodes[i]->left);
             }
-            if(childNodes[i]->right != NULL){
+            if(childNodes[i]->right != nullptr){
                 nextChildNodes.push_back(childNodes[i]->right);
             }
         }
@@ -400,7 +400,7 @@ Post_Conditions: Current and it's children are deleted
 */
 template <class Data, class Key>
 void BST<Data, Key>::FullClear(Node* current){
-    if(current == NULL){
+    if(current == nullptr){
         return;
     }
     FullClear(current->left);
