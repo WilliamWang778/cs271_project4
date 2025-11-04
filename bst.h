@@ -21,6 +21,7 @@ private:
     void FullClear(Node* current);
     void DeepCopy(const BST& other);
 
+    // getMinNode is used to find the node with the minimum key in a subtree
     Node* getMinNode(Node* x){
         while (x != nullptr && x -> left != nullptr){
             x = x -> left;

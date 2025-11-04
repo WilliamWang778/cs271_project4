@@ -8,6 +8,15 @@ using namespace std;
 Pre-Conditions: fname is a file name, and data and class are strings
 Post_Conditions: BST from the file is made
 */
+
+// Creates a BST from a CSV file with lines of "hex,bin"
+// Returns a pointer to the created BST
+// Default template types are string for both Data and Key
+// You can specify different types if needed
+// For example: BST<int, string>* bst = create_bst<int, string>("file.txt");
+// But for this use case, we use string for both
+// The binary strings are the keys, and the hexadecimal strings are the data
+
 template <class Data = string, class Key = string>
 BST<Data, Key>* create_bst(string fname){
     BST<Data, Key> *bst = new BST<Data, Key>();
