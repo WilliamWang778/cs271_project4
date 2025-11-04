@@ -223,8 +223,8 @@ Key BST<Data, Key>::min_key(){
 }
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: The BST that is valid and obeys the BST property.
+Post-Conditions: Returns the key of the successor node if it exists, otherwise returns a default-constructed Key.
 */
 template <class Data, class Key>
 Key BST<Data, Key>::successor(Key k){
@@ -260,8 +260,8 @@ Key BST<Data, Key>::successor(Key k){
 }
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: The BST that is valid and obeys the BST property.
+Post-Conditions: Returns a string of all keys in the BST in sorted order, separated by spaces.
 */
 template <class Data, class Key>
 std::string BST<Data, Key>::in_order(){
@@ -277,8 +277,8 @@ std::string BST<Data, Key>::in_order(){
 }
 
 /*
-Pre-Conditions: 
-Post-Conditions: 
+Pre-Conditions: The BST that is valid and obeys the BST property.
+Post-Conditions: The BST is modified to only contain nodes with keys in the range [low, high].
 */
 template <class Data, class Key>
 void BST<Data, Key>::trim(Key low, Key high){
@@ -348,6 +348,13 @@ std::string BST<Data, Key>::to_string(){
 }
 
 
+
+//helper funciton (in_order_helper)
+/*
+Pre-Conditions: Current is either a node or nullptr
+Post_Conditions: Current and it's children are deleted
+*/
+
 template<class Data, class Key>
 std::stringstream BST<Data, Key>::in_order_helper(Node* x) const {
     
@@ -366,11 +373,7 @@ std::stringstream BST<Data, Key>::in_order_helper(Node* x) const {
 
 
 
-
-
-
-
-//helper funciton
+//helper funciton (Full Clear)
 /*
 Pre-Conditions: Current is either a node or NULL
 Post_Conditions: Current and it's children are deleted
