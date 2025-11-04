@@ -335,9 +335,7 @@ std::string BST<Data, Key>::to_string(){
     while(!childNodes.empty()){
 
         //clears newChildren
-        while(!nextChildNodes.empty()){
-            nextChildNodes.pop_back();
-        }
+        nextChildNodes.clear();
 
         //add all siblings/cousins to the string
         for(int i=0; i<childNodes.size(); i++){
@@ -359,13 +357,10 @@ std::string BST<Data, Key>::to_string(){
         }
 
         //empty kids
-        while(!childNodes.empty()){
-            childNodes.pop_back();
-        }
+        childNodes.clear();
+
         //remake kids
-        for(int i=0; i < nextChildNodes.size(); i++){
-            childNodes.push_back(nextChildNodes[i]);
-        }
+        childNodes = nextChildNodes;
     }
     return ss.str();
 }
